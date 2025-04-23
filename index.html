@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viva Bem Elite - Volta à Ilha 2025</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --accent: #3498db;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--secondary);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background: var(--secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            display: block;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: var(--dark);
+        }
+        
+        .team-goal {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+        }
+        
+        .team-goal strong {
+            color: var(--secondary);
+            font-size: 1.4rem;
+        }
+        
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .member-card {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-name {
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+        
+        .member-legs {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .leg-number {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .schedule-table th, .schedule-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .schedule-table th {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .schedule-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .difficulty-easy {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .difficulty-moderate {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        
+        .difficulty-hard {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .difficulty-very-hard {
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        
+        .map-container {
+            height: 500px;
+            width: 100%;
+            margin-top: 1rem;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav a {
+                padding: 0.75rem;
+            }
+            
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">VIVA BEM ELITE</div>
+            <div class="subtitle">Volta à Ilha 2025 - Florianópolis</div>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#home">Início</a></li>
+            <li><a href="#team">Equipe</a></li>
+            <li><a href="#schedule">Percurso</a></li>
+            <li><a href="#rules">Regras</a></li>
+            <li><a href="#competitors">Adversários</a></li>
+            <li><a href="#contact">Contato</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section id="home">
+            <h2>Bem-vindo à Equipe Viva Bem Elite</h2>
+            <p>Estamos preparados para o desafio da Volta à Ilha 2025, uma das provas mais emblemáticas do revezamento em Florianópolis. Com uma equipe dedicada e treinada, buscamos superar nossos limites e alcançar excelentes resultados.</p>
+            
+            <div class="team-goal">
+                <p>NOSSO OBJETIVO: <strong>TEMPO TOTAL ABAIXO DE 11h28min</strong></p>
+            </div>
+            
+            <h3>Sobre a Prova</h3>
+            <p>A Volta à Ilha é um revezamento de longa distância que percorre 140km ao redor da ilha de Florianópolis, divididos em 19 trechos com diferentes níveis de dificuldade. Nossa equipe está inscrita na categoria Elite Masculina, competindo contra as melhores equipes do país.</p>
+            
+            <h3>Próximos Eventos</h3>
+            <ul>
+                <li><strong>26/04/2025:</strong> Largada da Categoria Elite - 07h30</li>
+                <li><strong>27/04/2025:</strong> Premiação - 09h30 no Majestic Palace Hotel</li>
+            </ul>
+        </section>
+        
+        <section id="team">
+            <h2>Nossa Equipe</h2>
+            <p>Conheça os corredores da Viva Bem Elite e os trechos que cada um irá percorrer:</p>
+            
+            <div class="members-grid">
+                <div class="member-card">
+                    <div class="member-info">
+                        <h3 class="member-name">Alan</h3>
+                        <p class="member-legs">
+                            <span class="leg-number">1</span> Beiramar/SC-401 (7,33km - Fácil)<br>
+                            <span class="leg-number">12</span> Barra/Joaquina (8,1km - Muito Difícil)
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-info">
+                        <h3 class="member-name">Fernando</h3>
+                        <p class="member-legs">
+                            <span class="leg-number">2</span> João Paulo/SC-401 (4,02km - Fácil)<br>
+                            <span class="leg-number">9</span> Ingleses/Santinho (4,7km - Fácil)<br>
+                            <span class="leg-number">19</span> Expressa Sul/Beira-mar (6,37km - Fácil)
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-info">
+                        <h3 class="member-name">Herlon</h3>
+                        <p class="member-legs">
+                            <span class="leg-number">3</span> SC401/Cacupé (8,12km - Difícil)<br>
+                            <span class="leg-number">11</span> Moçambique/Barra (5,73km - Muito Difícil)<br>
+                            <span class="leg-number">18</span> Carianos/Expressa Sul (7,35km - Fácil)
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-info">
+                        <h3 class="member-name">Vini</h3>
+                        <p class="member-legs">
+                            <span class="leg-number">4</span> S.Antônio/Daniela (7,94km - Moderado)<br>
+                            <span class="leg-number">10</span> Santinho/Moçambique (8,49km - Muito Difícil)<br>
+                            <span class="leg-number">17</span> Tapera/Carianos (8,38km - Difícil)
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-info">
+                        <h3 class="member-name">Rapha</h3>
+                        <p class="member-legs">
+                            <span class="leg-number">5</span> Daniela/Jurerê (5,04km - Moderado)<br>
+                            <span class="leg-number">16</span> Morro do Sertão (16,34km - O mais difícil)
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-info">
+                        <h3 class="member-name">Rodrigo</h3>
+                        <p class="member-legs">
+                            <span class="leg-number">6</span> Jurerê/Cachoeira (5,32km - Moderado)<br>
+                            <span class="leg-number">14</span> Campeche/Armação (7,7km - Muito Difícil)
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-info">
+                        <h3 class="member-name">Paulinho</h3>
+                        <p class="member-legs">
+                            <span class="leg-number">7</span> Cachoeira/Brava (9,03km - Muito Difícil)<br>
+                            <span class="leg-number">13</span> Joaquina/Campeche (5,02km - Muito Difícil)
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-info">
+                        <h3 class="member-name">Bruno</h3>
+                        <p class="member-legs">
+                            <span class="leg-number">8</span> Brava/Ingleses (5,14km - Difícil)<br>
+                            <span class="leg-number">15</span> Armação/Açores (9,15km - Difícil)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="schedule">
+            <h2>Percurso Completo</h2>
+            <p>Confira todos os trechos da Volta à Ilha 2025 com distâncias e níveis de dificuldade:</p>
+            
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Trecho</th>
+                        <th>Posto de Troca</th>
+                        <th>Distância (km)</th>
+                        <th>Dificuldade</th>
+                        <th>Atleta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Beiramar/SC-401</td>
+                        <td>7,33</td>
+                        <td class="difficulty-easy">Fácil</td>
+                        <td>Alan</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>João Paulo/SC-401</td>
+                        <td>4,02</td>
+                        <td class="difficulty-easy">Fácil</td>
+                        <td>Fernando</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>SC401/Cacupé</td>
+                        <td>8,12</td>
+                        <td class="difficulty-hard">Difícil</td>
+                        <td>Herlon</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>S.Antônio/Daniela</td>
+                        <td>7,94</td>
+                        <td class="difficulty-moderate">Moderado</td>
+                        <td>Vini</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Daniela/Jurerê</td>
+                        <td>5,04</td>
+                        <td class="difficulty-moderate">Moderado</td>
+                        <td>Rapha</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Jurerê/Cachoeira</td>
+                        <td>5,32</td>
+                        <td class="difficulty-moderate">Moderado</td>
+                        <td>Rodrigo</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Cachoeira/Brava</td>
+                        <td>9,03</td>
+                        <td class="difficulty-very-hard">Muito Difícil</td>
+                        <td>Paulinho</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Brava/Ingleses</td>
+                        <td>5,14</td>
+                        <td class="difficulty-hard">Difícil</td>
+                        <td>Bruno</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Ingleses/Santinho</td>
+                        <td>4,7</td>
+                        <td class="difficulty-easy">Fácil</td>
+                        <td>Fernando</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Santinho/Moçambique</td>
+                        <td>8,49</td>
+                        <td class="difficulty-very-hard">Muito Difícil</td>
+                        <td>Vini</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Moçambique/Barra</td>
+                        <td>5,73</td>
+                        <td class="difficulty-very-hard">Muito Difícil</td>
+                        <td>Herlon</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>Barra/Joaquina</td>
+                        <td>8,1</td>
+                        <td class="difficulty-very-hard">Muito Difícil</td>
+                        <td>Alan</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>Joaquina/Campeche</td>
+                        <td>5,02</td>
+                        <td class="difficulty-very-hard">Muito Difícil</td>
+                        <td>Paulinho</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>Campeche/Armação</td>
+                        <td>7,7</td>
+                        <td class="difficulty-very-hard">Muito Difícil</td>
+                        <td>Rodrigo</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>Armação/Açores</td>
+                        <td>9,15</td>
+                        <td class="difficulty-hard">Difícil</td>
+                        <td>Bruno</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>Morro do Sertão</td>
+                        <td>16,34</td>
+                        <td class="difficulty-very-hard">O mais difícil</td>
+                        <td>Rapha</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>Tapera/Carianos</td>
+                        <td>8,38</td>
+                        <td class="difficulty-hard">Difícil</td>
+                        <td>Vini</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>Carianos/Expressa Sul</td>
+                        <td>7,35</td>
+                        <td class="difficulty-easy">Fácil</td>
+                        <td>Herlon</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>Expressa Sul/Beira-mar</td>
+                        <td>6,37</td>
+                        <td class="difficulty-easy">Fácil</td>
+                        <td>Fernando</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Mapa do Percurso</h3>
+            <div class="map-container">
+                <!-- Aqui iria um iframe do Google Maps ou Mapbox com o percurso -->
+                <p style="text-align: center; padding: 2rem;">[Mapa interativo do percurso da Volta à Ilha 2025]</p>
+            </div>
+        </section>
+        
+        <section id="rules">
+            <h2>Regras Importantes</h2>
+            <p>Principais regras da competição que nossa equipe deve seguir:</p>
+            
+            <h3>Regras Gerais</h3>
+            <ul>
+                <li>Cada equipe receberá um bastão que deve ser passado dentro dos limites do funil no Posto de Troca</li>
+                <li>O fechamento do Portal de Chegada será às 20h30</li>
+                <li>Todo atleta deve correr com pulseira de identificação/lacre visível</li>
+                <li>Os números de peito devem estar visíveis na frente e atrás do corpo</li>
+                <li>Veículos de apoio devem estar devidamente identificados com adesivos da prova</li>
+            </ul>
+            
+            <h3>Principais Punições</h3>
+            <ul>
+                <li>15min de acréscimo por atleta correndo fora do local determinado nas ruas</li>
+                <li>15min por troca de atleta fora da zona demarcada</li>
+                <li>15min por atleta utilizando apenas 1 dos números de peito</li>
+                <li>15min por carro de apoio acompanhando o corredor a menos de 20m</li>
+                <li>30min de acréscimo por atleta "cortando caminho"</li>
+                <li>Desclassificação por uso de transporte durante o percurso</li>
+            </ul>
+            
+            <h3>Dicas dos Treinadores</h3>
+            <ul>
+                <li>Levar 3 peças de roupa para troca</li>
+                <li>Protetor solar e repelente são essenciais</li>
+                <li>Tênis adequado para cada trecho</li>
+                <li>Repositores hidroeletrolíticos</li>
+                <li>"Farmacinha" com medicamentos básicos</li>
+                <li>Ficar atento à previsão do tempo</li>
+            </ul>
+        </section>
+        
+        <section id="competitors">
+            <h2>Equipes Adversárias</h2>
+            <p>Principais competidores na categoria Elite Masculina:</p>
+            
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Equipe</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Villarinho 1 (Elite)</td>
+                        <td>Senador Canedo</td>
+                        <td>GO</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Urapazi</td>
+                        <td>Florianópolis</td>
+                        <td>SC</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Polícia Militar de Santa Catarina</td>
+                        <td>Florianópolis</td>
+                        <td>SC</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>V8 Assessoria Esportiva</td>
+                        <td>Curitiba</td>
+                        <td>PR</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Portonave</td>
+                        <td>Navegantes</td>
+                        <td>SC</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Viva Bem - Elite Masculina</td>
+                        <td>São José</td>
+                        <td>SC</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>AABB</td>
+                        <td>São Paulo</td>
+                        <td>SP</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>CDO Runners</td>
+                        <td>Itapema</td>
+                        <td>SC</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="contact">
+            <h2>Contato</h2>
+            <p>Entre em contato com a equipe Viva Bem Elite para patrocínios, apoios ou outras informações:</p>
+            
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 2rem;">
+                <div style="flex: 1; min-width: 250px; margin: 1rem;">
+                    <h3>Redes Sociais</h3>
+                    <p>
+                        <i class="fab fa-instagram"></i> @vivabelmelite<br>
+                        <i class="fab fa-facebook"></i> /vivabelmelite<br>
+                        <i class="fab fa-twitter"></i> @vivabelmelite
+                    </p>
+                </div>
+                
+                <div style="flex: 1; min-width: 250px; margin: 1rem;">
+                    <h3>Email</h3>
+                    <p><i class="fas fa-envelope"></i> contato@vivabelmelite.com.br</p>
+                </div>
+                
+                <div style="flex: 1; min-width: 250px; margin: 1rem;">
+                    <h3>Patrocínio</h3>
+                    <p><i class="fas fa-handshake"></i> patrocinio@vivabelmelite.com.br</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="logo">VIVA BEM ELITE</div>
+            <p>Equipe de Revezamento - Volta à Ilha 2025</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-strava"></i></a>
+            </div>
+            
+            <p>&copy; 2025 Viva Bem Elite. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
