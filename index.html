@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viva Bem Elite - Volta à Ilha 2025</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuGroyYTXkc4eGM3KBWxYkc_s8O02GHtA&callback=initMap" async defer></script>
     <style>
         :root {
             --primary: #00555A; /* Seu teal escuro principal */
@@ -215,6 +216,8 @@
             color: #8e44ad;
             font-weight: bold;
         }
+
+        #map { height: 800px; width: 100%; }
         
         .map-container {
             height: 500px;
@@ -548,8 +551,32 @@
             
             <h3>Mapa do Percurso</h3>
 
-            <iframe src="https://www.google.com/maps/@-27.6134912,-48.647343,10.69z/data=!4m2!11m1!2sRuWEZsem6KSJ7z8hkcmk18SyM4HxgA?entry=ttu&g_ep=EgoyMDI1MDQyMS4wIKXMDSoASAFQAw%3D%3D" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+            
+                <div id="map"></div>
+                    <script>
+                        function initMap() {
+                            const map = new google.maps.Map(document.getElementById("map"), {
+                                center: { lat: -27.6181523, lng: -48.5044482 },
+                                zoom: 11,
+                            });
+                
+                            // Adicione marcadores manualmente (exemplo)
+                            const marcadores = [
+                                { lat: -27.5781523, lng: -48.5044482, title: "Ponto 1" },
+                                { lat: -27.6121389, lng: -48.53275, title: "Posto 19" },
+                                // Adicione outros pontos conforme necessário
+                            ];
+                
+                            marcadores.forEach(local => {
+                                new google.maps.Marker({
+                                    position: local,
+                                    map: map,
+                                    title: local.title,
+                                });
+                            });
+                        }
+                    </script>
+            
             
             <div class="map-container">
 
