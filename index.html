@@ -61,7 +61,7 @@
                 if (contador >= imagens.length) contador = 0;
                 carrossel.style.transform = 'translateX(' + (-tamanho * contador) + 'px)';
                 atualizarIndicadores();
-            }, 5000);
+            }, 7000);
             
             // Pausa no hover
             carrossel.addEventListener('mouseenter', () => {
@@ -74,7 +74,7 @@
                     if (contador >= imagens.length) contador = 0;
                     carrossel.style.transform = 'translateX(' + (-tamanho * contador) + 'px)';
                     atualizarIndicadores();
-                }, 5000);
+                }, 7000);
             });
         });
     </script>
@@ -346,7 +346,7 @@
         /* Estilos do carrossel */
         .carrossel-container {
             position: relative;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 20px auto;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -356,7 +356,7 @@
         .carrossel {
             display: flex;
             transition: transform 0.5s ease-in-out;
-            height: 400px;
+            height: 500px;
         }
         
         .carrossel img {
