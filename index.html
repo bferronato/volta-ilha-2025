@@ -4,7 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viva Bem Elite - Volta à Ilha 2025</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuGroyYTXkc4eGM3KBWxYkc_s8O02GHtA&callback=initMap" async defer></script>
+<!--     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuGroyYTXkc4eGM3KBWxYkc_s8O02GHtA&callback=initMap" async defer></script> -->
+    
+    <script>
+        // JavaScript do carrossel
+        document.addEventListener('DOMContentLoaded', function() {
+            const carrossel = document.querySelector('.carrossel');
+            const imagens = document.querySelectorAll('.carrossel img');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const indicadores = document.querySelectorAll('.indicador');
+            
+            let contador = 0;
+            const tamanho = imagens[0].clientWidth;
+            
+            // Posiciona o carrossel
+            carrossel.style.transform = 'translateX(' + (-tamanho * contador) + 'px)';
+            
+            // Ouvintes de botões
+            nextBtn.addEventListener('click', () => {
+                if (contador >= imagens.length - 1) return;
+                contador++;
+                carrossel.style.transform = 'translateX(' + (-tamanho * contador) + 'px)';
+                atualizarIndicadores();
+            });
+            
+            prevBtn.addEventListener('click', () => {
+                if (contador <= 0) return;
+                contador--;
+                carrossel.style.transform = 'translateX(' + (-tamanho * contador) + 'px)';
+                atualizarIndicadores();
+            });
+            
+            // Indicadores
+            indicadores.forEach((indicador, index) => {
+                indicador.addEventListener('click', () => {
+                    contador = index;
+                    carrossel.style.transform = 'translateX(' + (-tamanho * contador) + 'px)';
+                    atualizarIndicadores();
+                });
+            });
+            
+            function atualizarIndicadores() {
+                indicadores.forEach((indicador, index) => {
+                    if (index === contador) {
+                        indicador.classList.add('ativo');
+                    } else {
+                        indicador.classList.remove('ativo');
+                    }
+                });
+            }
+            
+            // Auto-play (opcional)
+            let intervalo = setInterval(() => {
+                contador++;
+                if (contador >= imagens.length) contador = 0;
+                carrossel.style.transform = 'translateX(' + (-tamanho * contador) + 'px)';
+                atualizarIndicadores();
+            }, 5000);
+            
+            // Pausa no hover
+            carrossel.addEventListener('mouseenter', () => {
+                clearInterval(intervalo);
+            });
+            
+            carrossel.addEventListener('mouseleave', () => {
+                intervalo = setInterval(() => {
+                    contador++;
+                    if (contador >= imagens.length) contador = 0;
+                    carrossel.style.transform = 'translateX(' + (-tamanho * contador) + 'px)';
+                    atualizarIndicadores();
+                }, 5000);
+            });
+        });
+    </script>
+    
     <style>
         :root {
             --primary: #00555A; /* Seu teal escuro principal */
@@ -268,6 +342,89 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Estilos do carrossel */
+        .carrossel-container {
+            position: relative;
+            max-width: 800px;
+            margin: 20px auto;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+        
+        .carrossel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 400px;
+        }
+        
+        .carrossel img {
+            width: 100%;
+            min-width: 100%;
+            object-fit: cover;
+        }
+        
+        .carrossel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 10;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .carrossel-btn:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+        
+        #prevBtn {
+            left: 10px;
+        }
+        
+        #nextBtn {
+            right: 10px;
+        }
+        
+        .carrossel-indicadores {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .indicador {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .indicador.ativo {
+            background-color: white;
+        }
+        
+        @media (max-width: 600px) {
+            .carrossel-container {
+                max-width: 100%;
+                border-radius: 0;
+            }
+            
+            .carrossel {
+                height: 300px;
+            }
+        }
+        
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -284,6 +441,7 @@
             <li><a href="#home">Início</a></li>
             <li><a href="#team">Equipe</a></li>
             <li><a href="#schedule">Percurso</a></li>
+            <li><a href="#trechos">Trechos</a></li>
             <li><a href="#estimativas">Estimativas</a></li>
             <li><a href="#rules">Regras</a></li>
         </ul>
@@ -550,9 +708,10 @@
             </table>
             
             <h3>Mapa do Percurso</h3>
+            <div> - - - </div>
 
             
-                <div id="map"></div>
+<!--                 <div id="map"></div>
                     <script>
                         function initMap() {
                             const map = new google.maps.Map(document.getElementById("map"), {
@@ -575,16 +734,52 @@
                                 });
                             });
                         }
-                    </script>
+                    </script> -->
             
             
-            <div class="map-container">
+            
+        </section>
 
-                <object data="./percursos-volta-a-Ilha-2025.pdf" type="application/pdf" width="1000" height="600">
-                  <p>Seu navegador não suporta visualização de PDF. <a href="./percursos-volta-a-Ilha-2025.pdf">Clique aqui para baixar o PDF.</a></p>
-                </object>
+        <section id="trechos">
+            <h2>Trechos da Prova</h2>
+            <p>Trechos individuais</p>
+
+            <div class="carrossel-container">
+                <div class="carrossel">
+                    <img src="./percursos/percurso-1.jpg" alt="Percurso 1">
+                    <img src="./percursos/percurso-2.jpg" alt="Percurso 2">
+                    <img src="./percursos/percurso-3.jpg" alt="Percurso 3">
+                    <img src="./percursos/percurso-4a.jpg" alt="Percurso 4A">
+                    <img src="./percursos/percurso-4b.jpg" alt="Percurso 4B">
+                    <img src="./percursos/percurso-5.jpg" alt="Percurso 5">
+                    <img src="./percursos/percurso-6.jpg" alt="Percurso 6">
+                    <img src="./percursos/percurso-7.jpg" alt="Percurso 7">
+                    <img src="./percursos/percurso-8.jpg" alt="Percurso 8">
+                    <img src="./percursos/percurso-9.jpg" alt="Percurso 9">
+                    <img src="./percursos/percurso-10.jpg" alt="Percurso 10">
+                    <img src="./percursos/percurso-11.jpg" alt="Percurso 11">
+                    <img src="./percursos/percurso-12.jpg" alt="Percurso 12">
+                    <img src="./percursos/percurso-13.jpg" alt="Percurso 13">
+                    <img src="./percursos/percurso-14.jpg" alt="Percurso 14">
+                    <img src="./percursos/percurso-15.jpg" alt="Percurso 15">
+                    <img src="./percursos/percurso-16.jpg" alt="Percurso 16">
+                    <img src="./percursos/percurso-17.jpg" alt="Percurso 17">
+                    <img src="./percursos/percurso-18.jpg" alt="Percurso 18">
+                    <img src="./percursos/percurso-19.jpg" alt="Percurso 19">
+                </div>
                 
+                <button class="carrossel-btn" id="prevBtn">&#10094;</button>
+                <button class="carrossel-btn" id="nextBtn">&#10095;</button>
+                
+                <div class="carrossel-indicadores">
+                    <div class="indicador ativo"></div>
+                    <div class="indicador"></div>
+                    <div class="indicador"></div>
+                    <div class="indicador"></div>
+                </div>
             </div>
+
+            
         </section>
 
         <section id="estimativas">
