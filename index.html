@@ -56,26 +56,26 @@
             }
             
             // Auto-play (opcional)
-            let intervalo = setInterval(() => {
-                contador++;
-                if (contador >= imagens.length) contador = 0;
-                carrossel.style.transform = 'translateX(' + (-tamanho * contador) + 'px)';
-                atualizarIndicadores();
-            }, 7000);
+            // let intervalo = setInterval(() => {
+            //     contador++;
+            //     if (contador >= imagens.length) contador = 0;
+            //     carrossel.style.transform = 'translateX(' + (-tamanho * contador) + 'px)';
+            //     atualizarIndicadores();
+            // }, 7000);
             
-            // Pausa no hover
-            carrossel.addEventListener('mouseenter', () => {
-                clearInterval(intervalo);
-            });
+            // // Pausa no hover
+            // carrossel.addEventListener('mouseenter', () => {
+            //     clearInterval(intervalo);
+            // });
             
-            carrossel.addEventListener('mouseleave', () => {
-                intervalo = setInterval(() => {
-                    contador++;
-                    if (contador >= imagens.length) contador = 0;
-                    carrossel.style.transform = 'translateX(' + (-tamanho * contador) + 'px)';
-                    atualizarIndicadores();
-                }, 7000);
-            });
+            // carrossel.addEventListener('mouseleave', () => {
+            //     intervalo = setInterval(() => {
+            //         contador++;
+            //         if (contador >= imagens.length) contador = 0;
+            //         carrossel.style.transform = 'translateX(' + (-tamanho * contador) + 'px)';
+            //         atualizarIndicadores();
+            //     }, 7000);
+            // });
         });
     </script>
     
